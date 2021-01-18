@@ -1,0 +1,13 @@
+server:
+  port: 8888
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    gateway:
+      routes:
+        - id: pms-service
+          uri: lb://pms-service
+          predicates:
+            - Path=/pms/**
