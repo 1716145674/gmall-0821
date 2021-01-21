@@ -168,7 +168,7 @@ INSERT INTO sys_menu(menu_id, parent_id, name, url, perms, type, icon, order_num
 INSERT INTO sys_menu(menu_id, parent_id, name, url, perms, type, icon, order_num) VALUES (24, 4, '新增', NULL, 'sys:menu:save,sys:menu:select', 2, NULL, 0);
 INSERT INTO sys_menu(menu_id, parent_id, name, url, perms, type, icon, order_num) VALUES (25, 4, '修改', NULL, 'sys:menu:update,sys:menu:select', 2, NULL, 0);
 INSERT INTO sys_menu(menu_id, parent_id, name, url, perms, type, icon, order_num) VALUES (26, 4, '删除', NULL, 'sys:menu:delete', 2, NULL, 0);
-INSERT INTO sys_menu(menu_id, parent_id, name, url, perms, type, icon, order_num) VALUES (27, 1, '参数管理', 'sys/config', 'sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete', 1, 'config', 6);
+INSERT INTO sys_menu(menu_id, parent_id, name, url, perms, type, icon, order_num) VALUES (27, 1, '参数管理', 'sys/com.atguigu.gmall.gateway.config', 'sys:com.atguigu.gmall.gateway.config:list,sys:com.atguigu.gmall.gateway.config:info,sys:com.atguigu.gmall.gateway.config:save,sys:com.atguigu.gmall.gateway.config:update,sys:com.atguigu.gmall.gateway.config:delete', 1, 'com.atguigu.gmall.gateway.config', 6);
 INSERT INTO sys_menu(menu_id, parent_id, name, url, perms, type, icon, order_num) VALUES (29, 1, '系统日志', 'sys/log', 'sys:log:list', 1, 'log', 7);
 INSERT INTO sys_menu(menu_id, parent_id, name, url, perms, type, icon, order_num) VALUES (30, 1, '文件上传', 'oss/oss', 'sys:oss:all', 1, 'oss', 6);
 

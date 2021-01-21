@@ -1,5 +1,6 @@
 package com.atguigu.gmall.pms.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -22,7 +23,8 @@ public class SpuDescEntity implements Serializable {
 	/**
 	 * 商品id
 	 */
-	@TableId
+	// 这个字段是需要手动输入的不能自动增长,而配置文件配置了id的自动增长策略 ,需要使用type修改id类型为手动插入
+	@TableId(type = IdType.INPUT)
 	private Long spuId;
 	/**
 	 * 商品介绍

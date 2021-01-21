@@ -16,6 +16,6 @@ package com.atguigu.common.utils;
 public class RedisKeys {
 
     public static String getSysConfigKey(String key){
-        return "sys:config:" + key;
+        return "sys:com.atguigu.gmall.gateway.config:" + key;
     }
 }

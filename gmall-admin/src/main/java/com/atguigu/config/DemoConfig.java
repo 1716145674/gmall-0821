@@ -1,4 +1,4 @@
-//package io.guli.config;
+//package io.guli.com.atguigu.gmall.gateway.config;
 //
 //import com.google.gson.Gson;
 //import HttpContextUtils;

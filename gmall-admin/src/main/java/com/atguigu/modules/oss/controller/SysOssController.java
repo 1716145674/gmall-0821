@@ -67,7 +67,7 @@ public class SysOssController {
     public R config(){
         CloudStorageConfig config = sysConfigService.getConfigObject(KEY, CloudStorageConfig.class);
 
-        return R.ok().put("config", config);
+        return R.ok().put("com.atguigu.gmall.gateway.config", config);
     }
 
 

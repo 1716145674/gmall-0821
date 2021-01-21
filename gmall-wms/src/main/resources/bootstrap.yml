@@ -1,0 +1,11 @@
+#bootstrap优先于application配置文件的加载
+spring:
+  application:
+    name: wms-service  #配置此服务的服务名称,配置到nacos中心时显示,gateway路由的uri: lb://pms-service ,配置中心的Data ID pms-service.yaml
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848 #nacos 配置中心的地址,bootstrap就是为了加载配置中心的配置而设置的,需要找到配置中心
+#        namespace: 7d801648-0656-4a1b-96a8-d27e36758a0d # 配置中心名称空间,区分不同的环境
+#        group: dev # 配置中心每个配置所在的组,区分不同的开发组
+        file-extension: yaml #配置中心配置文件拓展名,默认properties可以不用写

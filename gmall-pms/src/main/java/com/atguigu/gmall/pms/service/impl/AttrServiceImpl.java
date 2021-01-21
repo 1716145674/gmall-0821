@@ -1,16 +1,16 @@
 package com.atguigu.gmall.pms.service.impl;
 
-import org.springframework.stereotype.Service;
-import java.util.Map;
+import com.atguigu.gmall.common.bean.PageParamVo;
+import com.atguigu.gmall.common.bean.PageResultVo;
+import com.atguigu.gmall.pms.entity.AttrEntity;
+import com.atguigu.gmall.pms.mapper.AttrMapper;
+import com.atguigu.gmall.pms.service.AttrService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.atguigu.gmall.common.bean.PageResultVo;
-import com.atguigu.gmall.common.bean.PageParamVo;
+import org.springframework.stereotype.Service;
 
-import com.atguigu.gmall.pms.mapper.AttrMapper;
-import com.atguigu.gmall.pms.entity.AttrEntity;
-import com.atguigu.gmall.pms.service.AttrService;
+import java.util.List;
 
 
 @Service("attrService")
@@ -24,6 +24,19 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, AttrEntity> impleme
         );
 
         return new PageResultVo(page);
+    }
+
+    @Override
+    public List<AttrEntity> queryAttrByCategoryId(Long cid, Integer type, Integer searchType) {
+        QueryWrapper<AttrEntity> wrapper = new QueryWrapper<>();
+        if (type!=null){
+            wrapper.eq("type",type);
+        }
+        if (searchType!=null){
+            wrapper.eq("search_type",searchType);
+        }
+
+        return baseMapper.selectList(wrapper);
     }
 
 }

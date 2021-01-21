@@ -2,6 +2,7 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.pms.vo.SpuVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,15 @@ public class SpuController {
     @Autowired
     private SpuService spuService;
 
+    // 1.根据商品的分类id ,分页查找所有的spu列表数据
+    @GetMapping("category/{categoryId}")
+    public ResponseVo<PageResultVo> querySpusByCategoryId(
+            @PathVariable("categoryId") Long cid,
+            PageParamVo pageParamVo
+    ){
+        PageResultVo pageResultVo=spuService.querySpusByCategoryId(cid,pageParamVo);
+        return ResponseVo.ok(pageResultVo);
+    }
     /**
      * 列表
      */
@@ -60,11 +70,11 @@ public class SpuController {
     /**
      * 保存
      */
+    // 2. 保存商品信息
     @PostMapping
     @ApiOperation("保存")
-    public ResponseVo<Object> save(@RequestBody SpuEntity spu){
-		spuService.save(spu);
-
+    public ResponseVo<Object> save(@RequestBody SpuVo spu){
+		spuService.bigSave(spu);
         return ResponseVo.ok();
     }
 
@@ -75,7 +85,6 @@ public class SpuController {
     @ApiOperation("修改")
     public ResponseVo update(@RequestBody SpuEntity spu){
 		spuService.updateById(spu);
-
         return ResponseVo.ok();
     }
 
@@ -86,7 +95,6 @@ public class SpuController {
     @ApiOperation("删除")
     public ResponseVo delete(@RequestBody List<Long> ids){
 		spuService.removeByIds(ids);
-
         return ResponseVo.ok();
     }
 
