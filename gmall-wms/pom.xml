@@ -24,12 +24,12 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-<!--        &lt;!&ndash;        引入远程调用接口服务&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.atguigu</groupId>-->
-<!--            <artifactId>gmall-sms-interface</artifactId>-->
-<!--            <version>0.0.1-SNAPSHOT</version>-->
-<!--        </dependency>-->
+        <!--        引入远程调用接口服务-->
+        <dependency>
+            <groupId>com.atguigu</groupId>
+            <artifactId>gmall-wms-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!--        数据库驱动-->
         <dependency>

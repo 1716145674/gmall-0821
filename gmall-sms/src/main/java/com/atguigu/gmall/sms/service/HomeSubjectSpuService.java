@@ -5,8 +5,6 @@ import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
 import com.atguigu.gmall.sms.entity.HomeSubjectSpuEntity;
 
-import java.util.Map;
-
 /**
  * 专题商品
  *

@@ -2,6 +2,7 @@ package com.atguigu.gmall.wms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.wms.vo.SkuWareVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,6 +36,13 @@ public class WareSkuController {
     @Autowired
     private WareSkuService wareSkuService;
 
+    // 根据sku_id查询是否有货,以及销量信息
+    @GetMapping("search/{skuId}")
+    public ResponseVo<SkuWareVo> queryStoreAndSalesBySkuId(@PathVariable("skuId") Long skuId){
+        SkuWareVo skuWareVo=wareSkuService.queryStoreAndSalesBySkuId(skuId);
+        return ResponseVo.ok(skuWareVo);
+
+    }
    // 根据sku_id查询所有的sku的库存
     @GetMapping("sku/{skuId}")
     public ResponseVo<List<WareSkuEntity>> queryWareSkuSBySkuId(@PathVariable("skuId") Long skuId){

@@ -2,9 +2,11 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.pms.entity.SpuAttrValueEntity;
 import com.atguigu.gmall.pms.vo.SpuVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +36,15 @@ public class SpuController {
 
     @Autowired
     private SpuService spuService;
+
+
+    // 3.远程调用:分页查询已经上架的spu信息
+    @PostMapping("json")
+    public ResponseVo<List<SpuEntity>> querySpusByPage(@RequestBody PageParamVo pageParamVo){
+        PageResultVo page = spuService.queryPage(pageParamVo);
+        List<SpuEntity> list = (List<SpuEntity>) page.getList();
+        return ResponseVo.ok(list);
+    }
 
     // 1.根据商品的分类id ,分页查找所有的spu列表数据
     @GetMapping("category/{categoryId}")
@@ -78,6 +89,8 @@ public class SpuController {
         return ResponseVo.ok();
     }
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
     /**
      * 修改
      */
@@ -85,6 +98,7 @@ public class SpuController {
     @ApiOperation("修改")
     public ResponseVo update(@RequestBody SpuEntity spu){
 		spuService.updateById(spu);
+//		this.rabbitTemplate.convertAndSend();
         return ResponseVo.ok();
     }
 

@@ -5,8 +5,6 @@ import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
 import com.atguigu.gmall.sms.entity.HomeAdvEntity;
 
-import java.util.Map;
-
 /**
  * 首页轮播广告
  *

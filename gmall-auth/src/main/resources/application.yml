@@ -1,0 +1,33 @@
+server:
+  port: 18089 #服务启动时,占用的端口号
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #nacos 配置中心地址
+    sentinel:
+      transport:
+        dashboard: localhost:8080 #sentinel的仪表盘地址
+        port: 8719 # sentinel 和该服务通信的端口号
+  jackson: #配置时间格式 以及时区的偏移修改
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  sleuth:
+    sampler:
+      probability: 1 #链路追踪的采集率 0-1 0表示不采集,1表示全采集
+  zipkin:
+    base-url: http://localhost:9411 # zipkin 的可视化界面地址
+    discovery-client-enabled: false #自己的请求调用排除
+    sender:
+      type: web # 以http的方式发送数据报文
+feign:
+  sentinel:
+    enabled: true #开启sentinel 对feign的支持,供远程调用
+auth:
+  jwt:
+    pubKeyPath: D:\\project\\rsa\\rsa.pub
+    priKeyPath: D:\\project\\rsa\\rsa.pri
+    secret: 30489ouerweljrLROE@#)(@$*343jlsdf
+    cookieName: GMALL-TOKEN
+    expire: 180
+    unick: unick

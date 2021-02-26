@@ -2,9 +2,11 @@ package com.atguigu.gmall.sms.controller;
 
 import java.util.List;
 
-import com.atguigu.gmall.sms.api.vo.SalesVo;
+import com.atguigu.gmall.sms.vo.ItemSaleVo;
+import com.atguigu.gmall.sms.vo.SalesVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.checkerframework.checker.units.qual.K;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +41,13 @@ public class SkuBoundsController {
     public ResponseVo saveSales(@RequestBody SalesVo salesVo){
         skuBoundsService.saveSales(salesVo);
         return ResponseVo.ok();
+    }
+    //根据skuid查询所有的营销信息
+    @GetMapping("sales/{skuId}")
+    public ResponseVo<List<ItemSaleVo>> queryItemSaleVosBySkuId(@PathVariable("skuId") Long skuId){
+        List<ItemSaleVo> list=skuBoundsService.queryItemSaleVosBySkuId(skuId);
+        return ResponseVo.ok(list);
+
     }
     /**
      * 列表

@@ -2,6 +2,8 @@ package com.atguigu.gmall.pms.service.impl;
 
 import com.atguigu.gmall.common.bean.PageParamVo;
 import com.atguigu.gmall.common.bean.PageResultVo;
+import com.atguigu.gmall.pms.entity.AttrEntity;
+import com.atguigu.gmall.pms.entity.SpuAttrValueEntity;
 import com.atguigu.gmall.pms.entity.SpuEntity;
 import com.atguigu.gmall.pms.feign.GmallSmsClient;
 import com.atguigu.gmall.pms.mapper.SpuMapper;
@@ -10,12 +12,18 @@ import com.atguigu.gmall.pms.vo.SpuVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.units.qual.A;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service("spuService")
@@ -53,6 +61,10 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, SpuEntity> implements
     private SpuAttrValueService spuAttrValueService;
     @Autowired
     private SkuService skuService;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+    @GlobalTransactional
     @Override
     public void bigSave(SpuVo spu) {
         //  保存spu信息
@@ -69,7 +81,11 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, SpuEntity> implements
 
         // 2.保存sku信息
         skuService.saveSkus(spu, spuId, spuBrandId, spuCategoryId);
+
+        rabbitTemplate.convertAndSend("PMS_GOODS_INSERT_EXCHANGE", "item.insert",spuId);
     }
+
+
 
     private SpuEntity getSpuEntity(SpuVo spu) {
         SpuEntity spuEntity = new SpuEntity();

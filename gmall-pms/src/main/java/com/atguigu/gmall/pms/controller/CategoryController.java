@@ -29,8 +29,21 @@ public class CategoryController {
 
     // 根据parentId 查询商品分类数据  parentId: -1：查询所有，0：查询一级节点
     @GetMapping("parent/{parentId}")
-    public ResponseVo<List<CategoryEntity>> getCategorysByParentId(@PathVariable("parentId") Long pid ){
-        List<CategoryEntity> categoryEntityList=categoryService.getCategorysByParentId(pid);
+    public ResponseVo<List<CategoryEntity>> getCategorysByParentId(@PathVariable("parentId") Long pid) {
+        List<CategoryEntity> categoryEntityList = categoryService.getCategorysByParentId(pid);
+        return ResponseVo.ok(categoryEntityList);
+    }
+
+    @GetMapping("parent/withSubs/{pid}")
+    public ResponseVo<List<CategoryEntity>> queryCategoriesWithSubsByPid(@PathVariable Long pid) {
+        List<CategoryEntity> categoryEntities = categoryService.queryCategoriesWithSubsByPid(pid);
+        return ResponseVo.ok(categoryEntities);
+    }
+
+    // 根据sku中的三级分类id查询一二三级分类
+    @GetMapping("level123/{level3Cid}")
+    public ResponseVo<List<CategoryEntity>> queryLevel123CategoriesByLevel3Id(@PathVariable("level3Cid") Long level3Cid){
+        List<CategoryEntity> categoryEntityList=categoryService.queryLevel123CategoriesByLevel3Id(level3Cid);
         return ResponseVo.ok(categoryEntityList);
     }
     /**
@@ -38,7 +51,7 @@ public class CategoryController {
      */
     @GetMapping
     @ApiOperation("分页查询")
-    public ResponseVo<PageResultVo> queryCategoryByPage(PageParamVo paramVo){
+    public ResponseVo<PageResultVo> queryCategoryByPage(PageParamVo paramVo) {
         PageResultVo pageResultVo = categoryService.queryPage(paramVo);
 
         return ResponseVo.ok(pageResultVo);
@@ -50,8 +63,8 @@ public class CategoryController {
      */
     @GetMapping("{id}")
     @ApiOperation("详情查询")
-    public ResponseVo<CategoryEntity> queryCategoryById(@PathVariable("id") Long id){
-		CategoryEntity category = categoryService.getById(id);
+    public ResponseVo<CategoryEntity> queryCategoryById(@PathVariable("id") Long id) {
+        CategoryEntity category = categoryService.getById(id);
 
         return ResponseVo.ok(category);
     }
@@ -61,8 +74,8 @@ public class CategoryController {
      */
     @PostMapping
     @ApiOperation("保存")
-    public ResponseVo<Object> save(@RequestBody CategoryEntity category){
-		categoryService.save(category);
+    public ResponseVo<Object> save(@RequestBody CategoryEntity category) {
+        categoryService.save(category);
 
         return ResponseVo.ok();
     }
@@ -72,8 +85,8 @@ public class CategoryController {
      */
     @PostMapping("/update")
     @ApiOperation("修改")
-    public ResponseVo update(@RequestBody CategoryEntity category){
-		categoryService.updateById(category);
+    public ResponseVo update(@RequestBody CategoryEntity category) {
+        categoryService.updateById(category);
 
         return ResponseVo.ok();
     }
@@ -83,8 +96,8 @@ public class CategoryController {
      */
     @PostMapping("/delete")
     @ApiOperation("删除")
-    public ResponseVo delete(@RequestBody List<Long> ids){
-		categoryService.removeByIds(ids);
+    public ResponseVo delete(@RequestBody List<Long> ids) {
+        categoryService.removeByIds(ids);
 
         return ResponseVo.ok();
     }

@@ -1,21 +1,17 @@
 package com.atguigu.gmall.pms.service.impl;
 
-import com.atguigu.gmall.pms.entity.SkuAttrValueEntity;
-import com.atguigu.gmall.pms.entity.SkuImagesEntity;
 import com.atguigu.gmall.pms.feign.GmallSmsClient;
 import com.atguigu.gmall.pms.service.SkuAttrValueService;
 import com.atguigu.gmall.pms.service.SkuImagesService;
 import com.atguigu.gmall.pms.vo.SkuVo;
 import com.atguigu.gmall.pms.vo.SpuVo;
-import com.atguigu.gmall.sms.api.vo.SalesVo;
+import com.atguigu.gmall.sms.vo.SalesVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -58,9 +54,12 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, SkuEntity> implements
                 skuEntity.setSpuId(spuId);
                 skuEntity.setBrandId(spuBrandId);
                 skuEntity.setCategoryId(spuCategoryId);
-                skuEntity.setDefaultImage(StringUtils.isBlank(skuVo.getDefaultImage())?skuVo.getImages().get(0):skuVo.getDefaultImage());
-                if (StringUtils.isBlank(skuVo.getDefaultImage())){
-                    skuVo.setDefaultImage(skuVo.getImages().get(0));
+                if (!CollectionUtils.isEmpty(skuVo.getImages())){
+
+                    skuEntity.setDefaultImage(StringUtils.isBlank(skuVo.getDefaultImage())?skuVo.getImages().get(0):skuVo.getDefaultImage());
+                    if (StringUtils.isBlank(skuVo.getDefaultImage())){
+                        skuVo.setDefaultImage(skuVo.getImages().get(0));
+                    }
                 }
                 this.save(skuEntity);
                 Long skuId = skuEntity.getId();

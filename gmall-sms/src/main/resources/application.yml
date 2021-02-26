@@ -1,42 +1,45 @@
 server:
-  port: 18082 #·þÎñÆô¶¯Ê±,Õ¼ÓÃµÄ¶Ë¿ÚºÅ
+  port: 18082 #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±,Õ¼ï¿½ÃµÄ¶Ë¿Úºï¿½
 spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848 #nacos ÅäÖÃÖÐÐÄµØÖ·
+        server-addr: localhost:8848 #nacos ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Ö·
     sentinel:
       transport:
-        dashboard: localhost:8080 #sentinelµÄÒÇ±íÅÌµØÖ·
-        port: 8719 # sentinel ºÍ¸Ã·þÎñÍ¨ÐÅµÄ¶Ë¿ÚºÅ
-  jackson: #ÅäÖÃÊ±¼ä¸ñÊ½ ÒÔ¼°Ê±ÇøµÄÆ«ÒÆÐÞ¸Ä
+        dashboard: localhost:8080 #sentinelï¿½ï¿½ï¿½Ç±ï¿½ï¿½Ìµï¿½Ö·
+        port: 8719 # sentinel ï¿½Í¸Ã·ï¿½ï¿½ï¿½Í¨ï¿½ÅµÄ¶Ë¿Úºï¿½
+    alibaba:
+      seata:
+        tx-service-group: gmall_tx_group
+  jackson: #ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ê½ ï¿½Ô¼ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½ï¿½Þ¸ï¿½
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   redis: #redis ip port
     host: 192.168.137.128
     port: 6379
-  datasource: #Êý¾Ý¿âÁ¬½ÓÐÅÏ¢,ËÄ´óÀà
+  datasource: #ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢,ï¿½Ä´ï¿½ï¿½ï¿½
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://192.168.137.128:3306/guli_sms?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: "123456Abc@"
   sleuth:
     sampler:
-      probability: 1 #Á´Â·×·×ÙµÄ²É¼¯ÂÊ 0-1 0±íÊ¾²»²É¼¯,1±íÊ¾È«²É¼¯
+      probability: 1 #ï¿½ï¿½Â·×·ï¿½ÙµÄ²É¼ï¿½ï¿½ï¿½ 0-1 0ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½É¼ï¿½,1ï¿½ï¿½Ê¾È«ï¿½É¼ï¿½
   zipkin:
-    base-url: http://localhost:9411 # zipkin µÄ¿ÉÊÓ»¯½çÃæµØÖ·
-    discovery-client-enabled: false #×Ô¼ºµÄÇëÇóµ÷ÓÃÅÅ³ý
+    base-url: http://localhost:9411 # zipkin ï¿½Ä¿ï¿½ï¿½Ó»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·
+    discovery-client-enabled: false #ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å³ï¿½
     sender:
-      type: web # ÒÔhttpµÄ·½Ê½·¢ËÍÊý¾Ý±¨ÎÄ
+      type: web # ï¿½ï¿½httpï¿½Ä·ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý±ï¿½ï¿½ï¿½
 feign:
   sentinel:
-    enabled: true #¿ªÆôsentinel ¶ÔfeignµÄÖ§³Ö,¹©Ô¶³Ìµ÷ÓÃ
+    enabled: true #ï¿½ï¿½ï¿½ï¿½sentinel ï¿½ï¿½feignï¿½ï¿½Ö§ï¿½ï¿½,ï¿½ï¿½Ô¶ï¿½Ìµï¿½ï¿½ï¿½
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #´òÓ¡sqlÈÕÖ¾ÐÅÏ¢µ½¿ØÖÆÌ¨
-  mapper-locations: classpath*:mapper/sms/**/*.xml # mapperµÄxmlËùÔÚµÄµØÖ·
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #ï¿½ï¿½Ó¡sqlï¿½ï¿½Ö¾ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
+  mapper-locations: classpath*:mapper/sms/**/*.xml # mapperï¿½ï¿½xmlï¿½ï¿½ï¿½ÚµÄµï¿½Ö·
   global-config:
     db-config:
-      id-type: auto #id ²ÉÓÃ×ÔÔöÄ£Ê½
-  type-aliases-package: com.atguigu.gmall.sms.entity
+      id-type: auto #id ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
+  type-aliases-package: com.atguigu.gmall.sms.api.entity
 

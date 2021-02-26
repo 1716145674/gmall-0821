@@ -1,12 +1,10 @@
 package com.atguigu.gmall.sms.service;
 
-import com.atguigu.gmall.sms.api.vo.SalesVo;
+import com.atguigu.gmall.sms.vo.SalesVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
 import com.atguigu.gmall.sms.entity.SkuFullReductionEntity;
-
-import java.util.Map;
 
 /**
  * 商品满减信息

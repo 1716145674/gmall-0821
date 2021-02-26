@@ -9,6 +9,9 @@ spring:
       transport:
         dashboard: localhost:8080 #sentinel的仪表盘地址
         port: 8719 # sentinel 和该服务通信的端口号
+    alibaba:
+      seata:
+        tx-service-group: gmall_tx_group  #配置seata的配置文件,指定事务的分组
   jackson: #配置时间格式 以及时区的偏移修改
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -28,6 +31,14 @@ spring:
     discovery-client-enabled: false #自己的请求调用排除
     sender:
       type: web # 以http的方式发送数据报文
+  rabbitmq:
+    virtual-host: /zqq
+    username: zqq
+    password: zqq
+    host: 192.168.137.128
+    port: 5672 #配置rabbitMq的基本属性
+    publisher-confirm-type: correlated #配置rabbitmq的生产者确认类型,simple是阻塞确认,correlated是异步确认
+    publisher-returns: true #开启生产者确认
 feign:
   sentinel:
     enabled: true #开启sentinel 对feign的支持,供远程调用
@@ -38,5 +49,5 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto #id 采用自增模式
-  type-aliases-package: com.atguigu.gmall.pms.entity 
+  type-aliases-package: com.atguigu.gmall.pms.entity
 

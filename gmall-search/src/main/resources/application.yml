@@ -1,0 +1,45 @@
+server:
+  port: 18086
+spring:
+  jackson: #\u914D\u7F6E\u65F6\u95F4\u683C\u5F0F \u4EE5\u53CA\u65F6\u533A\u7684\u504F\u79FB\u4FEE\u6539
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+  zipkin:
+    base-url: http://localhost:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability:1
+  elasticsearch:
+    rest:
+      uris: http://192.168.137.128:9200
+  thymeleaf:
+    cache: false
+  rabbitmq:
+    virtual-host: /zqq
+    username: zqq
+    password: zqq
+    host: 192.168.137.128
+    port: 5672 #配置rabbitMq的基本属性
+    listener:
+      simple:
+        prefetch: 1 #配置能者多劳
+        concurrency: 4 #配置多线程为4
+        acknowledge-mode: manual #配置手动确认
+feign:
+  sentinel:
+    enabled: true
+logging:
+  level:
+    com.atguigu.gmall: debug

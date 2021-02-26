@@ -5,8 +5,6 @@ import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
 import com.atguigu.gmall.sms.entity.SeckillSkuEntity;
 
-import java.util.Map;
-
 /**
  * 秒杀活动商品关联
  *
